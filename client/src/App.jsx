@@ -1,0 +1,50 @@
+
+import { Route, Routes } from 'react-router-dom'
+import './App.css'
+
+import HomePage from './Pages/HomePage'
+import Signup from './Pages/Signup'
+import Login from './Pages/Login'
+import Contact from './Pages/Contact'
+import About from './Pages/About'
+import NotRequiredAuth from './Components/Auth/NotRequiredAuth'
+import NotFound from './Pages/NotFound'
+import Denied from './Pages/Denied'
+import ForgotPassword from './Pages/Password/ForgotPassword'
+import ResetPassword from './Pages/Password/ResetPassword'
+import ChangePassword from './Pages/Password/ChangePassword'
+import Profile from './Pages/User/Profile'
+import RequiredAuth from './Components/Auth/RequiredAuth'
+import EditProfile from './Pages/User/EditProfile'
+
+function App() {
+ return(
+  <Routes>
+    <Route path='/' element={<HomePage />} />
+    <Route path='/contact' element={<Contact />} />
+    <Route path='/about' element={<About />} />
+
+    <Route path='/forgotPassword' element={<ForgotPassword />} />
+    <Route path='/resetPassword/:resetToken' element={<ResetPassword />} />
+    <Route path='/changePassword' element={<ChangePassword />} />
+
+    
+    <Route element={<NotRequiredAuth />}>
+      <Route path='/signup' element={<Signup />} />
+      <Route path='/login' element={<Login />} />
+    </Route>
+
+    <Route element={<RequiredAuth />}>
+      <Route path='/user/profile' element={<Profile />} />
+      <Route path='/changePassword' element={<ChangePassword />} />
+      <Route path='/user/editprofile' element={<EditProfile />} />
+    </Route>
+
+    <Route path='/denied' element={<Denied />} />
+    <Route path='*' element={<NotFound />} />
+
+  </Routes>
+ )
+}
+
+export default App
