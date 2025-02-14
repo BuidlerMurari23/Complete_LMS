@@ -5,6 +5,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 function RequiredAuth({ allowedRoles }){
     const { isLoggedIn, role } = useSelector((state) => state?.auth);
+
     const location = useLocation();
     return isLoggedIn && allowedRoles.find((myRole) => myRole === role) ? (
             <Outlet />

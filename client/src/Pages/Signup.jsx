@@ -99,7 +99,7 @@ function Signup(){
         <Layout>
             <div className="flex items-center justify-center h-[92vh]">
                 <form className="flex flex-col justify-center gap-3 rounded-lg p-4 text-white w-96 shadow-[0_0_10px_black]"
-                      onSubmit={createNewAccount} noValidate  >
+                      onSubmit={createNewAccount}  >
                     <h1 className="font-bold text-center text-2xl">
                         Registration Page
                     </h1>

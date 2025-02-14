@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 function getStoredData(){
     try {
         const storeData = localStorage.getItem("data");
-        return (storeData) ? JSON.parse(storeData) : {};
+        return (storeData) && (storeData !== "undefined") ? JSON.parse(storeData) : {};
     } catch (e) {
         console.error("Error in parsing localStorage data", e);
         return {};
@@ -60,7 +60,7 @@ export const login = createAsyncThunk("/user/login", async (data) => {
 
 export const logout = createAsyncThunk("/user/logout", async () => {
     try {
-        const res = axiosInstance.post("/user/login");
+        const res = axiosInstance.post("/user/logout");
 
     toast.promise(res, {
         loading: "Logging Out ...",
@@ -130,9 +130,10 @@ export const resetPassword = createAsyncThunk("/user/resetPassword", async (data
 });
 
 
-export const changePassword = createAsyncThunk("/user/change-password", async (userPassword) => {
+export const changePassword = createAsyncThunk("/user/changePassword", async (userPassword) => {
     try {
-        const res = axiosInstance.post("/user/change-password", userPassword);
+        const res = axiosInstance.post("/user/changePassword", userPassword);
+        console.log("res", res)
         toast.promise(res, {
             loading: "Wait! Change password.",
             success: (data) => {
@@ -173,9 +174,9 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
         .addCase(login.fulfilled, (state, action) => {
-            localStorage.getItem("isLoggedIn", true);
-            localStorage.getItem("data", JSON.stringify(action?.payload?.user));
-            localStorage.getItem("role", action?.payload?.user?.role);
+            localStorage.setItem("isLoggedIn", true);
+            localStorage.setItem("data", JSON.stringify(action?.payload?.user));
+            localStorage.setItem("role", action?.payload?.user?.role);
 
             state.isLoggedIn = true;
             state.data = action?.payload?.user;
@@ -188,9 +189,9 @@ const authSlice = createSlice({
             state.role = "";
         })
         .addCase(getUserData.fulfilled, (state, action) => {
-            localStorage.getItem("isLoggedIn", true);
-            localStorage.getItem("data", JSON.stringify(action?.payload?.user));
-            localStorage.getItem("role", action?.payload?.user?.role);
+            localStorage.setItem("isLoggedIn", true);
+            localStorage.setItem("data", JSON.stringify(action?.payload?.user));
+            localStorage.setItem("role", action?.payload?.user?.role);
 
             state.isLoggedIn = true;
             state.data = action?.payload?.user;

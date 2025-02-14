@@ -18,7 +18,7 @@ function ChangePassword(){
     });
 
     function handlePasswordChange(event){
-        const { name, value } = event.targer;
+        const { name, value } = event.target;
         setUserPassword({
             ...userPassword,
             [name]: value

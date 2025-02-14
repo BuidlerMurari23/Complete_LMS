@@ -17,7 +17,7 @@ function Profile(){
 
     return(
         <Layout>
-            <div className="flex items-center justify-center h-[90vh]">
+            <div className="flex items-center justify-center h-[92vh]">
                 <div className="text-white p-4 gap-4 my-10 w-80 flex flex-col rounded-lg shadow-[0_0_10px_black]">
                     <img src={userData?.avatar?.secure_url} alt="User Profile Image"
                          className="w-40 rounded-full border border-black m-auto" />
@@ -37,12 +37,12 @@ function Profile(){
 
                     <div className="flex items-center justify-center gap-2">
                         <Link to={'/changePassword'}>
-                            <button className="w-1/2 text-xl text-center font-semibold bg-yellow-600 hover:bg-yellow-500 rounded-lg cursor-pointer transition-all ease-in-out duration-300">
+                            <button className=" px-2 py-1  text-lg text-center font-semibold bg-yellow-600 hover:bg-yellow-500 rounded-lg cursor-pointer transition-all ease-in-out duration-300">
                                 Change Password
                             </button>
                         </Link>
                         <Link to={'/user/editprofile'}>
-                            <button className="w-1/2 text-xl text-center font-semibold border border-yellow-600 hover:border-yellow-500 rounded-lg cursor-pointer transition-all ease-in-out duration-300">
+                            <button className=" px-2 py-1  text-lg text-center font-semibold border border-yellow-600 hover:border-yellow-500 rounded-lg cursor-pointer transition-all ease-in-out duration-300">
                                 Edit Profile
                             </button>
                         </Link>

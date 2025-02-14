@@ -34,7 +34,7 @@ function App() {
       <Route path='/login' element={<Login />} />
     </Route>
 
-    <Route element={<RequiredAuth />}>
+    <Route element={<RequiredAuth allowedRoles={["USER", "ADMIN", "SUPERADMIN"]} />}>
       <Route path='/user/profile' element={<Profile />} />
       <Route path='/changePassword' element={<ChangePassword />} />
       <Route path='/user/editprofile' element={<EditProfile />} />

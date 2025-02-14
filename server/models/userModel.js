@@ -62,12 +62,12 @@ userSchema.pre('save', async function (next){
 
 
 userSchema.methods = {
-    comparePassword: async (plainPassword) => {
-        return await bcrypt.compare(plainPassword, this.password);
+    comparePassword:  function (plainPassword){
+        return  bcrypt.compare(plainPassword, this.password);
     },
 
-    generateJWTToken: async () => {
-        return await jwt.sign(
+    generateJWTToken: function (){
+        return  jwt.sign(
             { id: this._id, role: this.role, subscription: this.subscription },
             process.env.JWT_SECRET,
             { expiresIn: process.env.JWT_EXPIRY }

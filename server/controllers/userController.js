@@ -14,7 +14,8 @@ const cookieOptions = {
 
 export const registerUser = asyncHandler( async ( req, res, next) => {
     const { fullName, email, password } = req.body;
-
+    // console.log(`this is data:`, req.body);
+        
     if(!fullName || !email || !password){
         return next( new AppError("All fields are required.", 400))
     };
@@ -38,7 +39,11 @@ export const registerUser = asyncHandler( async ( req, res, next) => {
         return next( new AppError("User registration failed. Please try again later.", 400))
     }
 
+    
+    // console.log(`this is req.file`, req.file);
+    // console.log("req.file.path", req.file.path);
     if(req.file){
+        
         try {
             const result = await cloudinary.v2.uploader.upload(req.file.path, {
                 folder: "Complete_LMS",
@@ -58,12 +63,14 @@ export const registerUser = asyncHandler( async ( req, res, next) => {
         } catch (e) {
             return next( new AppError(e.message, 400))
         }
+        
     }
 
     await user.save();
     user.password = undefined;
 
-    const token = await user.generateJWTToken();
+    const token = user.generateJWTToken();
+    console.log("token", token)
     res.cookie('token', token, cookieOptions);
 
     res.status(200).json({
@@ -83,7 +90,7 @@ export const loginUser = asyncHandler( async (req, res, next) => {
 
     const user = await User.findOne({ email });
 
-    if(!( user && ( await user.comparePassword(password)))){
+    if(!user &&  !user.comparePassword(password)){
         return next( new AppError("Email or Password doesnot match. Please try again.", 401))
     }
 
@@ -209,7 +216,11 @@ export const resetPassword = asyncHandler( async (req, res, next) => {
 
 export const changePassword = asyncHandler( async (req, res, next) => {
     const { oldPassword, newPassword } = req.body;
-    const { id }  = req.user.id;
+    
+    const { id }  = req.user;
+
+    console.log("This is Id:>>", id);
+    console.log("This is req.user data: >> ", req.user);
 
     if(!oldPassword || !newPassword){
         return next( new AppError("Old Password and New Password are required"));
