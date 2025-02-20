@@ -14,7 +14,6 @@ const cookieOptions = {
 
 export const registerUser = asyncHandler( async ( req, res, next) => {
     const { fullName, email, password } = req.body;
-    // console.log(`this is data:`, req.body);
         
     if(!fullName || !email || !password){
         return next( new AppError("All fields are required.", 400))
@@ -39,9 +38,6 @@ export const registerUser = asyncHandler( async ( req, res, next) => {
         return next( new AppError("User registration failed. Please try again later.", 400))
     }
 
-    
-    // console.log(`this is req.file`, req.file);
-    // console.log("req.file.path", req.file.path);
     if(req.file){
         
         try {
@@ -108,7 +104,7 @@ export const loginUser = asyncHandler( async (req, res, next) => {
 });
 
 
-export const logoutUser = asyncHandler( async (req, res, next) => {
+export const logoutUser = asyncHandler( async (_req, res, _next) => {
     res.cookie('token', null, {
         secure: process.env.NODE_ENV === "production" ? true : false,
         maxAge: 0,
@@ -140,6 +136,8 @@ export const getLoggedInUserDetails = asyncHandler( async (req, res, next) => {
 export const forgotPassword = asyncHandler( async (req, res, next) => {
     const { email } = req.body;
 
+    
+
     if(!email){
         return next( new AppError("Please enter the email id", 400));
     }
@@ -151,7 +149,7 @@ export const forgotPassword = asyncHandler( async (req, res, next) => {
     }
 
     const resetToken = await user.generatePasswordResetToken();
-
+    console.log(" resetToken: >>",resetToken)
     await user.save();
 
     const resetPasswordURL = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
@@ -218,9 +216,6 @@ export const changePassword = asyncHandler( async (req, res, next) => {
     const { oldPassword, newPassword } = req.body;
     
     const { id }  = req.user;
-
-    console.log("This is Id:>>", id);
-    console.log("This is req.user data: >> ", req.user);
 
     if(!oldPassword || !newPassword){
         return next( new AppError("Old Password and New Password are required"));

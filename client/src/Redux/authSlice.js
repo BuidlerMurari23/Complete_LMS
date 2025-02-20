@@ -133,7 +133,6 @@ export const resetPassword = createAsyncThunk("/user/resetPassword", async (data
 export const changePassword = createAsyncThunk("/user/changePassword", async (userPassword) => {
     try {
         const res = axiosInstance.post("/user/changePassword", userPassword);
-        console.log("res", res)
         toast.promise(res, {
             loading: "Wait! Change password.",
             success: (data) => {
@@ -151,6 +150,7 @@ export const changePassword = createAsyncThunk("/user/changePassword", async (us
 export const updateProfile = createAsyncThunk("/user/updateProfile", async (data) => {
     try {
         const res = axiosInstance.put(`/user/update/:${data[0]}`, data[1]);
+        console.log("respones in update Profile: >>", res)
         toast.promise(res, {
             loading: "Wait! Updateing the Profile.",
             success: (data) => {

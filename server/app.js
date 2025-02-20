@@ -5,7 +5,9 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import errorMiddleware from './middleware/errorMiddleware.js';
 import userRouter from "./routes/userRoutes.js";
+import courseRouter from "./routes/courseRoutes.js";
 import miscelleanousRouter from "./routes/miscelleaneousRoutes.js";
+
 
 
 config();
@@ -26,6 +28,7 @@ app.use(cookieParser());
 
 
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/course', courseRouter);
 
 app.use('/api/v1', miscelleanousRouter);
 

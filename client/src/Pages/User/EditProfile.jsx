@@ -20,6 +20,7 @@ function EditProfile(){
         userID: useSelector((state) => state?.auth?.data?._id),
     });
 
+
     function getImage(event){
         event.preventDefault();
         
@@ -66,6 +67,7 @@ function EditProfile(){
         formData.append("avatar", userData.avatar);
 
         const newUserData = [userData.userID, formData];
+        console.log("newUserData:", newUserData)
 
         await dispatch(updateProfile(newUserData));
 
@@ -107,7 +109,7 @@ function EditProfile(){
                         </Link>
                     </p>
 
-                    <button className="w-full text-lg text-center font-semibold py-2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 cursor-pointer"
+                    <button className="w-full text-lg text-center font-semibold rounded-lg py-2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 cursor-pointer"
                             type="submit">
                         Update Profile
                     </button>

@@ -1,0 +1,39 @@
+import { useDispatch, useSelector } from "react-redux";
+import Layout from "../../Layout/Layout";
+import { useEffect } from "react";
+import { getAllCourses } from "../../Redux/courseSlice";
+import CourseCard from "../../Components/CourseCard";
+
+
+
+function CourseList(){
+
+    const dispatch = useDispatch();
+
+    const { courseData } = useSelector((state) => state?.course);
+
+    useEffect(() => {
+        (async () => {
+           await dispatch(getAllCourses());
+        })
+    },[])
+    return(
+        <Layout>
+            <div className="h-[92vh] text-white gap-10 pl-20 pt-12 flex flex-col flex-wrap">
+                <h1 className="text-center text-3xl font-semibold">
+                    Explore the course created by {" "}
+                    <span className="font-bold text-yellow-500">Industry Experts</span>
+                </h1>
+                
+                <div className="mb-10 flex flex-wrap gap-14">
+                    { courseData?.map((element) => {
+                        return <CourseCard key={element._id} data={element} />
+                    })}
+                </div>
+            </div>
+        </Layout>
+    );
+};
+
+
+export default CourseList;

@@ -74,7 +74,7 @@ userSchema.methods = {
         )
     },
 
-    generatePasswordResetToken: async () => {
+    generatePasswordResetToken:  function (){
 
         const resetToken = crypto.randomBytes(20).toString('hex');
 

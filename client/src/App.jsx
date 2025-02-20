@@ -16,6 +16,10 @@ import ChangePassword from './Pages/Password/ChangePassword'
 import Profile from './Pages/User/Profile'
 import RequiredAuth from './Components/Auth/RequiredAuth'
 import EditProfile from './Pages/User/EditProfile'
+import CourseList from './Pages/Course/CourseList'
+import CreateCourse from './Pages/Course/CreateCourse'
+import CourseDescription from './Pages/Course/CourseDescription'
+
 
 function App() {
  return(
@@ -23,6 +27,10 @@ function App() {
     <Route path='/' element={<HomePage />} />
     <Route path='/contact' element={<Contact />} />
     <Route path='/about' element={<About />} />
+
+    <Route path='/course' element={<CourseList />} />
+    <Route path='/create' element={<CreateCourse />} />
+    <Route path='/description' element={<CourseDescription />} />
 
     <Route path='/forgotPassword' element={<ForgotPassword />} />
     <Route path='/resetPassword/:resetToken' element={<ResetPassword />} />
