@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import errorMiddleware from './middleware/errorMiddleware.js';
 import userRouter from "./routes/userRoutes.js";
 import courseRouter from "./routes/courseRoutes.js";
+import paymentRouter from "./routes/paymentRoutes.js";
 import miscelleanousRouter from "./routes/miscelleaneousRoutes.js";
 
 
@@ -29,7 +30,7 @@ app.use(cookieParser());
 
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/course', courseRouter);
-
+app.use('/api/v1/payment', paymentRouter);
 app.use('/api/v1', miscelleanousRouter);
 
 
