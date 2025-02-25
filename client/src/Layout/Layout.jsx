@@ -57,7 +57,7 @@ function Layout({ children }) {
                             <Link to={"/"}>Home</Link>
                         </li>
                         <li className="hover:bg-[rgb(8,7,16)] hover:rounded-xl">
-                            <Link to={"/courses"}>Courses</Link>
+                            <Link to={"/course"}>Courses</Link>
                         </li>
                         <li className="hover:bg-[rgb(8,7,16)] hover:rounded-xl">
                             <Link to={"/contact"}>Contact Us</Link>

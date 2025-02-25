@@ -1,4 +1,5 @@
 import asyncHandler from "../middleware/asyncHandlerMiddleware.js";
+import User from "../models/userModel.js";
 import AppError from "../utils/AppError.js";
 import SendEmail from "../utils/SendEmail.js";
 
@@ -23,3 +24,18 @@ export const contactUs = asyncHandler( async (req, res, next) => {
         message: "Your request has been submitted successfully."
     });
 });
+
+
+export const userStats = asyncHandler( async (req, res, next) => {
+    const allUsersCount = await User.countDocuments();
+    const subscribedUsersCount = await User.countDocuments({
+        'subscription.status': 'active',
+    });
+
+    res.status(200).json({
+        success: true,
+        message: "Getting all registered users count",
+        allUsersCount,
+        subscribedUsersCount,
+    });
+})

@@ -247,49 +247,57 @@ export const changePassword = asyncHandler( async (req, res, next) => {
 
 
 export const updateUser = asyncHandler( async (req, res, next) => {
-    const { id } = req.params;
-    const { fullName } = req.body;
-
-    const user = await User.findById(id);
-
-    if(!user){
-        return next( new AppError(`User doesnot exists with id: ${id}`, 400));
-    }
-
-    if(fullName){
-        user.fullName = fullName;
-    }
-
-    if(req.file){
-        await cloudinary.v2.uploader.destroy(user.avatar.public_id);
-
-        try {
-            const result = await cloudinary.v2.uploader.upload(req.file.path, {
-                folder: "Complete_LMS",
-                height: 250,
-                width: 250,
-                gravity: "faces",
-                crop: "fill" 
-            });
-
-            if(result){
-                user.avatar.public_id = result.public_id;
-                user.avatar.secure_url = result.secure_url;
-
-                fs.rm(`uploads/${req.file.filename}`)
-            }
-        } catch (e) {
-            return next( new AppError(e || "File not uploaded. Please try again", 400))
-        }
-    }
-
-    await user.save();
+   try {
+       const { id } = req.user;
+       const { fullName } = req.body;
+       console.log("Id is", id)
+   
+       const user = await User.findById(id);
+   
+        
+   
+       if(!user){
+           return next( new AppError(`User doesnot exists with id: ${id}`, 400));
+       }
+   
+       if(fullName){
+           user.fullName = fullName;
+       }
+   
+       if(req.file){
+           await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+   
+           try {
+               const result = await cloudinary.v2.uploader.upload(req.file.path, {
+                   folder: "Complete_LMS",
+                   height: 250,
+                   width: 250,
+                   gravity: "faces",
+                   crop: "fill" 
+               });
+   
+               if(result){
+                   user.avatar.public_id = result.public_id;
+                   user.avatar.secure_url = result.secure_url;
+   
+                   fs.rm(`uploads/${req.file.filename}`)
+               }
+           } catch (e) {
+               return next( new AppError(e || "File not uploaded. Please try again", 400))
+           }
+       }
+   
+       await user.save();
+       
+       res.status(200).json({
+           success: true,
+           message: "User is updated successfully.",
+           user,
+       });
     
-    res.status(200).json({
-        success: true,
-        message: "User is updated successfully.",
-        user,
-    });
+   } catch (e) {
+    console.log("error is:", e)
+   }
 });
 
 

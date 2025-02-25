@@ -1,0 +1,43 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
+import axiosInstance from "../helpers/axiosInstance.js";
+
+
+const initialState = {
+    allUsersCount: 0,
+    subscribedUsersCount: 0,
+};
+
+
+export const getStatsData = createAsyncThunk("/get/stats", async () => {
+    try {
+       const res = axiosInstance.get("/admin/stats/users");
+       toast.promise(res, {
+        loading: "Wait! Getting the stats...",
+        success: (data) => {
+            return data?.data?.message;
+        },
+        error: "Sorry! Failed to load stats..."
+       });
+       
+       return (await res)?.data;
+    } catch (e) {
+        toast.error(e?.response?.data?.message);
+    }
+});
+
+
+const statSlice = createSlice({
+    name: "stat",
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(getStatsData.fulfilled, (state, action) => {
+            state.allUsersCount = action?.payload?.allUsersCount;
+            state.subscribedUsersCount = action?.payload?.subscribedUsersCount;
+        });
+    },
+});
+
+
+export default statSlice.reducer;

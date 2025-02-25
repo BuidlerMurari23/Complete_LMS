@@ -19,6 +19,12 @@ import EditProfile from './Pages/User/EditProfile'
 import CourseList from './Pages/Course/CourseList'
 import CreateCourse from './Pages/Course/CreateCourse'
 import CourseDescription from './Pages/Course/CourseDescription'
+import Checkout from './Pages/Payment/Checkout'
+import CheckoutFail from './Pages/Payment/CheckoutFail'
+import CheckoutSuccess from './Pages/Payment/CheckoutSuccess'
+import AddLecture from './Pages/Dashboard/AddLecture'
+import DisplayLectures from './Pages/Dashboard/DisplayLectures'
+import AdminDashboard from './Pages/Dashboard/AdminDashboard'
 
 
 function App() {
@@ -31,6 +37,14 @@ function App() {
     <Route path='/course' element={<CourseList />} />
     <Route path='/create' element={<CreateCourse />} />
     <Route path='/description' element={<CourseDescription />} />
+
+    <Route path='/checkout' element={<Checkout />} />
+    <Route path='/fail' element={<CheckoutFail />} />
+    <Route path='/success' element={<CheckoutSuccess />} />
+
+    <Route path='/addle' element={<AddLecture />} />
+    <Route path='/dis' element={<DisplayLectures />} />
+    <Route path='/das' element={<AdminDashboard />} />
 
     <Route path='/forgotPassword' element={<ForgotPassword />} />
     <Route path='/resetPassword/:resetToken' element={<ResetPassword />} />

@@ -12,9 +12,9 @@ import { allPayments,
 const router = Router();
 
 router.route('/subscribe').post(isLoggedIn, buySubscription);
-router.route('verify').post(isLoggedIn, verifySubscription);
+router.route('/verify').post(isLoggedIn, verifySubscription);
 router.route('/unsubscribe').post(isLoggedIn, authorizedSubscriber, cancelSubscription);
-router.route('/razorpay-api').get(isLoggedIn, getRazorpayApiKey);
+router.route('/razorpay-key').get(isLoggedIn, getRazorpayApiKey);
 router.route('/').get(isLoggedIn, authorizedRoles("ADMIN"), allPayments);
 
 
