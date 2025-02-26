@@ -15,7 +15,7 @@ function HomePage(){
                         qualified faculities at a very affordable cost.
                     </p>
                     <div className="space-x-6 mt-10">
-                        <Link to={"/courses"}>
+                        <Link to={"/course"}>
                         <button className="px-5 py-3 bg-yellow-500 hover:bg-yellow-600 rounded-md text-lg cursor-pointer transition-all ease-in-out duration-300">
                             Explore Courses
                         </button>

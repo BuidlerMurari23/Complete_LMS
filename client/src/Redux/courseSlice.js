@@ -16,7 +16,8 @@ export const getAllCourses = createAsyncThunk("courses/get", async () => {
             success: "Courses loaded successfully...",
             error: "Sorry! Failed to load courses..."
         });
-        
+        const response = await res;
+        console.log(response?.data?.courses)
         return (await res)?.data?.courses;
 
     } catch (e) {
@@ -42,7 +43,8 @@ export const createNewCourse = createAsyncThunk("/course/post", async (data) => 
             success: "Your course is created successfully...",
             error: "Sorry! Failed to create course..."
         });
-
+        const response = await res
+        console.log("respones", response?.data)
         return (await res)?.data
     } catch (e) {
         toast.error(e?.response?.data?.message);

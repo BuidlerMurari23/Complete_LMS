@@ -11,15 +11,17 @@ function CourseList(){
     const dispatch = useDispatch();
 
     const { courseData } = useSelector((state) => state?.course);
+    console.log("course data", courseData);
 
+    async function loadCousers() {
+        await dispatch(getAllCourses());
+    }
     useEffect(() => {
-        (async () => {
-           await dispatch(getAllCourses());
-        })
+        loadCousers();
     },[])
     return(
         <Layout>
-            <div className="h-[92vh] text-white gap-10 pl-20 pt-12 flex flex-col flex-wrap">
+            <div className="min-h-[92vh] text-white gap-10 pl-20 pt-12 flex flex-col">
                 <h1 className="text-center text-3xl font-semibold">
                     Explore the course created by {" "}
                     <span className="font-bold text-yellow-500">Industry Experts</span>
@@ -27,6 +29,7 @@ function CourseList(){
                 
                 <div className="mb-10 flex flex-wrap gap-14">
                     { courseData?.map((element) => {
+                        
                         return <CourseCard key={element._id} data={element} />
                     })}
                 </div>
