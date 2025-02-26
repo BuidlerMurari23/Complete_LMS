@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Layout from "../../Layout/Layout";
 import toast from "react-hot-toast";
 import { createNewCourse, updateCourseById } from "../../Redux/courseSlice";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 
 function CreateCourse() {
@@ -11,7 +12,10 @@ function CreateCourse() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { initialCouserData } = useLocation().state;
+        
+    const  initialCouserData  = useLocation();
+    console.log("init", initialCouserData)
+    
     // const {initialCouserData} = undefined
 
     const [isDisabled, setIsDisabled] = useState(!initialCouserData?.newCourse);
@@ -85,8 +89,7 @@ function CreateCourse() {
             });
 
             setIsDisabled(false);
-            // admin dashbord is still in progress
-            // navigate("/admin/dashboard")
+            navigate("/admin/dashboard")
         }
             
     }
@@ -96,13 +99,13 @@ function CreateCourse() {
         <Layout>
             <div className="flex items-center justify-center h-[92vh]">
                 <form className="relative flex flex-col justify-center p-4 gap-5 my-10 text-white rounded-lg w-[700px] h-[450px] shadow-[0_0_10px_black]"
-                      onSubmit={handleFormSubmit}>
+                      onSubmit={handleFormSubmit} noValidate>
 
-                    {/* Admin Dashboard is still pending to word on */}
-                    {/* <Link to={"/admin/dashboard"}
+                    
+                    <Link to={"/admin/dashboard"}
                           className="absolute top-8 text-2xl link text-accent cursor-pointer">
                         <AiOutlineArrowLeft />
-                    </Link> */}
+                    </Link>
 
                     <h1 className="text-center font-bold text-2xl">
                         {!initialCouserData.newCourse ? "Update" : "Create New"}{" "} <span>Course</span>

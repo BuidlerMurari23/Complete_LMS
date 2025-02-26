@@ -33,36 +33,41 @@ function App() {
     <Route path='/' element={<HomePage />} />
     <Route path='/contact' element={<Contact />} />
     <Route path='/about' element={<About />} />
-
-    <Route path='/course' element={<CourseList />} />
-    <Route path='/create' element={<CreateCourse />} />
-    <Route path='/description' element={<CourseDescription />} />
-
-    <Route path='/checkout' element={<Checkout />} />
-    <Route path='/fail' element={<CheckoutFail />} />
-    <Route path='/success' element={<CheckoutSuccess />} />
-
-    <Route path='/addle' element={<AddLecture />} />
-    <Route path='/dis' element={<DisplayLectures />} />
-    <Route path='/das' element={<AdminDashboard />} />
+    <Route path='/denied' element={<Denied />} />
 
     <Route path='/forgotPassword' element={<ForgotPassword />} />
     <Route path='/resetPassword/:resetToken' element={<ResetPassword />} />
-    <Route path='/changePassword' element={<ChangePassword />} />
 
-    
+    <Route path='/course' element={<CourseList />} />
+
     <Route element={<NotRequiredAuth />}>
       <Route path='/signup' element={<Signup />} />
       <Route path='/login' element={<Login />} />
     </Route>
 
-    <Route element={<RequiredAuth allowedRoles={["USER", "ADMIN", "SUPERADMIN"]} />}>
+    <Route element={<RequiredAuth allowedRoles={["USER", "ADMIN", "SUPERADMIN"]} />} >
+      <Route path='/changepassword' element={<ChangePassword />} />
       <Route path='/user/profile' element={<Profile />} />
-      <Route path='/changePassword' element={<ChangePassword />} />
       <Route path='/user/editprofile' element={<EditProfile />} />
+
+      <Route path='/checkout' element={<Checkout />} />
+      <Route path='/checkout/success' element={<CheckoutSuccess />} />
+      <Route path='/checkout/fail' element={<CheckoutFail />} />
+
+      <Route path='/course/description' element={<CourseDescription />} />
+      <Route path='/course/displaylectures' element={<DisplayLectures />} />
+      
     </Route>
 
-    <Route path='/denied' element={<Denied />} />
+
+    <Route element={<RequiredAuth allowedRoles={["ADMIN"]} />} >
+      <Route path='/admin/dashboard' element={<AdminDashboard />} />
+
+      <Route path='/course/create' element={<CreateCourse />} />
+      <Route path='/course/addlecture' element={<AddLecture />} />
+    </Route>
+      
+  
     <Route path='*' element={<NotFound />} />
 
   </Routes>
@@ -70,3 +75,9 @@ function App() {
 }
 
 export default App
+  
+
+
+    
+
+    

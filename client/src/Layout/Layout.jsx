@@ -56,6 +56,24 @@ function Layout({ children }) {
                         <li className="hover:bg-[rgb(8,7,16)] hover:rounded-xl">
                             <Link to={"/"}>Home</Link>
                         </li>
+
+                        {isLoggedIn && role === "ADMIN" && (
+                                <ul>
+                                    <li className="hover:bg-[rgb(8,7,16)] hover:rounded-xl">
+                                    <Link to={'/admin/dashboard'}>Dashboard</Link>
+                                    </li>
+                                    <li className="hover:bg-[rgb(8,7,16)] hover:rounded-xl">
+                                    <Link to={'/course/create'}>Create Course</Link>
+                                    </li>
+                                    <li className="hover:bg-[rgb(8,7,16)] hover:rounded-xl">
+                                    <Link to={'/course/addlecture'}>Add Lectures</Link>
+                                    </li>
+                                </ul>
+                            )}
+                                
+
+                        
+
                         <li className="hover:bg-[rgb(8,7,16)] hover:rounded-xl">
                             <Link to={"/course"}>Courses</Link>
                         </li>
