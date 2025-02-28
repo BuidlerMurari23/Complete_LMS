@@ -25,6 +25,7 @@ import CheckoutSuccess from './Pages/Payment/CheckoutSuccess'
 import AddLecture from './Pages/Dashboard/AddLecture'
 import DisplayLectures from './Pages/Dashboard/DisplayLectures'
 import AdminDashboard from './Pages/Dashboard/AdminDashboard'
+import UpdateCourse from './Pages/Course/UpdateCourse'
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
       <Route path='/admin/dashboard' element={<AdminDashboard />} />
 
       <Route path='/course/create' element={<CreateCourse />} />
+      <Route path='/course/update' element={<UpdateCourse />} />
       <Route path='/course/addlecture' element={<AddLecture />} />
     </Route>
       

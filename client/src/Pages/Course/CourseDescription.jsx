@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../Layout/Layout";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { deleteCourseById, updateCourseById } from "../../Redux/courseSlice";
 
 
 function CourseDescription(){
@@ -9,6 +10,8 @@ function CourseDescription(){
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {role, data} = useSelector((state) => state?.auth);
+
+   
 
     useEffect(() => {
         window.scrollTo(0,0)
@@ -32,10 +35,22 @@ function CourseDescription(){
                             </div>
 
                             {role === "ADMIN" || data?.subscription?.status === "active" ? (
+                                <>
                                 <button onClick={() => navigate("/course/displaylectures", {state: {...state}})}
                                         className="text-xl font-semibold px-5 py-3 w-full rounded-xl bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 cursor-pointer">
                                     Watch Lectures
                                 </button>
+                                <div className="mt-5 flex items-center justify-between">
+                                    <button onClick={() => navigate("/course/update", {state: {...state}})}
+                                        className="text-xl font-semibold px-5 py-3 ml-5 mr-5 w-1/2 rounded-xl bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 cursor-pointer">
+                                            Update Course
+                                    </button>
+                                    <button onClick={() => dispatch(deleteCourseById(data?._id))}
+                                            className="text-xl font-semibold px-5 py-3 ml-5 mr-5 w-1/2 rounded-xl bg-red-600 hover:bg-red-500 transition-all ease-in-out duration-300 cursor-pointer">
+                                                Delete Course
+                                    </button>
+                                </div>
+                                </>
                             ) : (
                                 <button onClick={() => navigate("/checkout")}
                                         className="text-xl font-semibold px-5 py-3 w-full rounded-xl bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 cursor-pointer">
@@ -43,6 +58,7 @@ function CourseDescription(){
                                 </button>
                             )}
                         </div>
+                        
                     </div>
 
                     <div className="text-2xl space-y-2">

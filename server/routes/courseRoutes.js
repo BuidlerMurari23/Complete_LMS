@@ -26,9 +26,9 @@ router.route('/')
 router.route('/:id')
         .get(isLoggedIn, authorizedSubscriber, getLecturesByCourseId)
         .post(isLoggedIn, authorizedRoles("ADMIN"), upload.single('lecture'), addLectureToCourseById)
-        .put(isLoggedIn, authorizedRoles("ADMIN"), updateCourseById);
+        .put(isLoggedIn, authorizedRoles("ADMIN"), updateCourseById)
+        .delete(isLoggedIn, authorizedRoles("ADMIN"), deleteCourseById);
 
-router.route('/:id&:id').delete(isLoggedIn, authorizedRoles("ADMIN"), deleteCourseById);
 
 
 
